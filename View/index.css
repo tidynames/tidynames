@@ -91,4 +91,9 @@ body {
 
 #lookupResults {
 	color: darkred;
+	background-color: #fff;
+}
+
+#lookupResults li {
+	list-style: none;
 }

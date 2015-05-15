@@ -53,13 +53,18 @@
 $(function() {
 	$('#addAction').click(function(ev) {
 		ev.preventDefault();
-		$.post('/add', { firstName: $('#firstName').val(), lastName: $('#lastName').val()})
-			.then(function(result) {
+		var $form = $(this).parent();
+		$.post(
+			'/add',
+			{
+				firstName : $form.find('input[name=firstName]').val(), 
+				lastName  : $form.find('input[name=lastName]').val()
+			}).then(function(result) {
 				$('#success').show();
 				setTimeout(function() {
 					$('#success').fadeOut('show');
 				}, 1000);
-				});
+			});
 	});
 
 	$('#checkAction').click(function(ev) {
@@ -74,14 +79,14 @@ $(function() {
 		).then(function(results) {
 			$("#lookupResults").html('');
 			results.split('\n').forEach(function(message) {
-				$("#lookupResults").append("<li><h2>" + message + "</h2></li>");
+				message && $("#lookupResults").append("<li><h2>" + message + "</h2></li>");
 			});
 		});
 	});
 
 
 	$('#lookup').click(function(ev) {
-		ev.preventDefault()
+		ev.preventDefault();
 		$.ajax({
 			url: "/lookup",
 			data: {
