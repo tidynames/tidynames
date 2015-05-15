@@ -1,16 +1,13 @@
 var pg = require('pg');
 var config = require('../../config');
+var Promise = require('promise');
 
 var SQL = {
   conString : "postgres://" + 
               config.SQL.user + ":" + 
               config.SQL.password + "@" + 
               config.SQL.host + "/" + 
-              config.SQL.database,
-
-  defaultErrorHandler : function(error) {
-    console.error('error running query', err);
-  }
+              config.SQL.database
 };
 
 
@@ -27,16 +24,19 @@ pg.connect(SQL.conString, function(err, client, done) {
 });
 
 
-SQL.query = function(query, params, successHandler, errorHandler) {
-  SQL.client.query(query, params || [], function(err, result) {
-      //call `done()` to release the client back to the pool
-      SQL.done();
+SQL.query = function(query, params) {
+  return new Promise(function (resolve, reject) {
+    SQL.client.query(query, params || [], function(err, result) {
+        //call `done()` to release the client back to the pool
+        SQL.done();
 
-      if(err) {
-        return (errorHandler || SQL.defaultErrorHandler)(err);
-      }
-      successHandler(result);
-    });
+        if(err) {
+          reject(err)
+        } else {
+          resolve(result);
+        }
+      });
+  });
 };
 
 module.exports = SQL;
