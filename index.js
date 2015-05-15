@@ -1,14 +1,14 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 var matcher = require('clj-fuzzy');
-var path    = require("path");
 
 var app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser());
+app.use(express.static(__dirname + '/View'));
 
-app.get('/',function(req,res){
-	res.sendFile(path.join(__dirname+'/index.html'));
+app.get('/',function(req, res){
+	res.sendFile('index.html');
 });
 
 function lookup(name)  {
@@ -61,7 +61,6 @@ app.get('/:name?', function (req, res) {
   }
 
 });
-
 
 var server = app.listen(3000, function () {
 
