@@ -71,3 +71,20 @@ input, textarea {
 	padding-right: 70px;
 	float: right;
 }
+
+#queryResultWrapper {
+	position: relative;
+	left: 50%;
+}
+
+#queryResult {
+	position: relative;
+	left: -250px;
+	width: 500px;
+	background-color: #fefefe;
+	border: 1px dashed #333;
+	padding: 10px;
+	margin: 40px 0;
+	text-align: left;
+}
+

@@ -20,7 +20,7 @@
 			<input class="keyword-input" id="firstName" name="firstName" placeholder="First name">
 			<input class="keyword-input" id="lastName" name="lastName" placeholder="Last name">
 		</div>
-		<button type="submit" class="btn btn-dark btn-lg">Submit</button>
+		<button type="submit" class="btn btn-dark btn-lg" id="addAction">Submit</button>
 	</form>
 	<br>
 	<h2>Lookup</h2>
@@ -30,9 +30,25 @@
 		</div>
 		<button type="submit" class="btn btn-dark btn-lg">Submit</button>
 	</form>
+	<div id="queryResultWrapper">
+		<div id="queryResult"></div>
+	</div>
 </div>
 <div id="bg">
 	<img src="landing.jpeg">
 </div>
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+$(function() {
+	$('#addAction').click(function(ev) {
+		ev.preventDefault();
+		$.post('/add', { firstName: $('#firstName').val(), lastName: $('#lastName').val()})
+			.then(function(result) {
+				$('#queryResult').text(result);
+			});
+	});
+});
+</script>
 </body>
 </html>
