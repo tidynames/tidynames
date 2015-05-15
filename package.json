@@ -4,7 +4,8 @@
   "description": "Service for name validation",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.12.3"
+    "express": "^4.12.3",
+    "clj-fuzzy": "*"
   },
   "devDependencies": {},
   "scripts": {
