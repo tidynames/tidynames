@@ -22,8 +22,10 @@ function lookupInDb(name)  {
       var matches = [];
       for (r in result.rows)  {
          var score = matcher.metrics.levenshtein(name, result.rows[r].value);
-         matches.push([result.rows[r].value, score]);
-      }
+         if (score)  {
+             matches.push([result.rows[r].value, score]);
+         } 
+     }
       return matches;
     });
 }
