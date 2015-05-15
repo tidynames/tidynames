@@ -11,6 +11,26 @@ app.get('/',function(req,res){
 	res.sendFile(path.join(__dirname+'/index.html'));
 });
 
+function lookup(name)  {
+  
+}
+
+app.get('/lookup', function (req, res) {
+	if (req.query.name)  {
+        var parts = req.query.name.split(' ');
+        for (p in parts)  {
+            lookup(parts[p].replace(/\s/g, '').toLower());
+        }
+    }
+	res.send('Hello World!');
+});
+
+app.post('/add',function(req, res){
+	var name = req.body.name;
+	console.log(name);
+	res.end("some information");
+});
+
 app.get('/:name?', function (req, res) {
   if (req.params.name)  {
       var dummy = 'John';
@@ -42,17 +62,6 @@ app.get('/:name?', function (req, res) {
 
 });
 
-
-app.get('/lookup', function (req, res) {
-	console.log('name: ' + req.query.name);
-	res.send('Hello World!');
-});
-
-app.post('/add',function(req, res){
-	var name = req.body.name;
-	console.log(name);
-	res.end("some information");
-});
 
 var server = app.listen(3000, function () {
 
