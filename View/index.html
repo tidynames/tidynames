@@ -28,11 +28,11 @@
 	</form>
 	<br>
 	<h2>Lookup</h2>
-	<form class="form-inline" role="form" method="get" action="/lookup">
+	<form class="form-inline" role="form">
 		<div class="form-group">
 			<input class="keyword-input" id="name" name="name" placeholder="Full Name">
 		</div>
-		<button type="submit" class="btn btn-dark btn-lg">Submit</button>
+		<button class="btn btn-dark btn-lg" id="lookup">Submit</button>
 	</form>
 </div>
 <div class="with-bg-size"></div>
@@ -49,6 +49,20 @@ $(function() {
 					$('#success').fadeOut('show');
 				}, 2000);
 				});
+	});
+
+	$('#lookup').click(function(ev) {
+		ev.preventDefault()
+		$.ajax({
+			url: "/lookup",
+			data: {
+				name: $("#name").val()
+			},
+			success: function(data) {
+				console.log(data);
+				// TODO: show the data
+			}
+		})
 	});
 });
 </script>
