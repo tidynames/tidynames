@@ -90,3 +90,7 @@ body {
 	color: #333333;
 	font-family: Copperplate, serif;
 }
+
+#lookupResults {
+	color: darkred;
+}

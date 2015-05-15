@@ -34,6 +34,8 @@
 		</div>
 		<button class="btn btn-dark btn-lg" id="lookup">Submit</button>
 	</form>
+	<ul id="lookupResults">
+	</ul>
 </div>
 <div class="with-bg-size"></div>
 
@@ -59,8 +61,9 @@ $(function() {
 				name: $("#name").val()
 			},
 			success: function(data) {
-				console.log(data);
-				// TODO: show the data
+				$.each(data, function(index, elem) {
+					$("#lookupResults").append("<li><h2>" + (index + 1) + ") " + elem + "</h2></li>");
+				});
 			}
 		})
 	});
