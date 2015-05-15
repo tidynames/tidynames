@@ -30,6 +30,9 @@ app.get('/:name?', function (req, res) {
 	  clj_fuzzy.metrics.tversky(req.params.name, dummy);
       res.send(result);
   }
+  else  {
+    res.send('Please specify a word to check!');
+  }
 
 });
 
