@@ -1,14 +1,14 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 var matcher = require('clj-fuzzy');
-var path    = require("path");
 
 var app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser());
+app.use(express.static(__dirname + '/View'));
 
-app.get('/',function(req,res){
-	res.sendFile(path.join(__dirname+'/index.html'));
+app.get('/',function(req, res){
+	res.sendFile('index.html');
 });
 
 app.get('/:name?', function (req, res) {
@@ -42,7 +42,6 @@ app.get('/:name?', function (req, res) {
 
 });
 
-
 app.get('/lookup', function (req, res) {
 	console.log('name: ' + req.query.name);
 	res.send('Hello World!');
@@ -51,7 +50,7 @@ app.get('/lookup', function (req, res) {
 app.post('/add',function(req, res){
 	var name = req.body.name;
 	console.log(name);
-	res.end("some information");
+	res.end(name);
 });
 
 var server = app.listen(3000, function () {
