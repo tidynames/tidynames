@@ -1,10 +1,13 @@
 var express = require('express');
+var bodyParser = require("body-parser");
 var app = express();
 var matcher = require('clj-fuzzy');
 
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.get('/:name?', function (req, res) {
   if (req.params.name)  {
-	  var dummy = 'John';
+      var dummy = 'John';
       var result = "Dice: " +
 	  clj_fuzzy.metrics.dice(req.params.name, dummy) + "<br>" +
       "Sorensen: " +
@@ -27,6 +30,18 @@ app.get('/:name?', function (req, res) {
 	  clj_fuzzy.metrics.tversky(req.params.name, dummy);
       res.send(result);
   }
+
+});
+
+app.get('/lookup', function (req, res) {
+	console.log('name: ' + req.query.name);
+	res.send('Hello World!');
+});
+
+app.post('/add',function(req, res){
+	var name = req.body.name;
+	console.log(name);
+	res.end("some information");
 });
 
 var server = app.listen(3000, function () {
