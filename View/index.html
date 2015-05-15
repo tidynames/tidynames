@@ -93,6 +93,7 @@ $(function() {
 				name: $("#name").val()
 			},
 			success: function(data) {
+				$("#lookupResults").html("");
 				$.each(data, function(index, elem) {
 					$("#lookupResults").append("<li><h2>" + (index + 1) + ") " + elem + "</h2></li>");
 				});
