@@ -13,22 +13,11 @@ app.get('/',function(req, res){
 	res.sendFile('index.html');
 });
 
-function lookup(name)  {
-  
-}
-
-app.get('/lookup', function (req, res) {
-	if (req.query.name)  {
-        var parts = req.query.name.split(' ');
-        for (p in parts)  {
-            //lookup(parts[p].replace(/\s/g, '').toLower());
-        }
-    }
-	res.send('Hello World!');
-});
-
 var addHandler = require('./app/action/add');
 app.post('/add', addHandler);
+
+var lookupHandler = require('./app/action/lookup');
+app.get('/lookup', lookupHandler);
 
 var server = app.listen(3000, function () {
 
