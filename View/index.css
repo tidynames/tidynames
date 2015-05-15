@@ -33,6 +33,12 @@ body {
 	background-color: rgba(0,0,0,0.4);
 }
 
+.btn-success {
+	border-radius: 0;
+	color: #fff;
+	background-color: green;
+}
+
 .btn-dark:hover,
 .btn-dark:focus,
 .btn-dark:active {
@@ -78,22 +84,6 @@ input, textarea {
 	padding-top: 70px;
 	padding-right: 70px;
 	padding-left: 100px;
-}
-
-#queryResultWrapper {
-	position: relative;
-	left: 50%;
-}
-
-#queryResult {
-	position: relative;
-	left: -250px;
-	width: 500px;
-	background-color: #fefefe;
-	border: 1px dashed #333;
-	padding: 10px;
-	margin: 40px 0;
-	text-align: left;
 }
 
 body {

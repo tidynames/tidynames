@@ -24,6 +24,7 @@
 			<input class="keyword-input" id="lastName" name="lastName" placeholder="Last name">
 		</div>
 		<button type="submit" class="btn btn-dark btn-lg" id="addAction">Submit</button>
+		<button class="btn btn-success btn-lg" id="success" style="display: none;">Success!</button>
 	</form>
 	<br>
 	<h2>Lookup</h2>
@@ -33,9 +34,6 @@
 		</div>
 		<button type="submit" class="btn btn-dark btn-lg">Submit</button>
 	</form>
-	<div id="queryResultWrapper">
-		<div id="queryResult"></div>
-	</div>
 </div>
 <div class="with-bg-size"></div>
 
@@ -46,8 +44,11 @@ $(function() {
 		ev.preventDefault();
 		$.post('/add', { firstName: $('#firstName').val(), lastName: $('#lastName').val()})
 			.then(function(result) {
-				$('#queryResult').text(result);
-			});
+				$('#success').show();
+				setTimeout(function() {
+					$('#success').fadeOut('show');
+				}, 2000);
+				});
 	});
 });
 </script>
