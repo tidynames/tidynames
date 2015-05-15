@@ -25,11 +25,8 @@ app.get('/lookup', function (req, res) {
 	res.send('Hello World!');
 });
 
-app.post('/add',function(req, res){
-	var firstName = req.body.firstName;
-	var lastName = req.body.lastName;
-	res.end("success");
-});
+var addHandler = require('./app/action/add');
+app.post('/add', addHandler);
 
 var server = app.listen(3000, function () {
 
