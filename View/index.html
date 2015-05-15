@@ -20,11 +20,20 @@
 	<h2>Add name</h2>
 	<form class="form-inline" role="form" method="post" action="/add">
 		<div class="form-group">
-			<input class="keyword-input" id="firstName" name="firstName" placeholder="First name">
-			<input class="keyword-input" id="lastName" name="lastName" placeholder="Last name">
+			<input class="keyword-input" name="firstName" placeholder="First name">
+			<input class="keyword-input" name="lastName" placeholder="Last name">
 		</div>
 		<button type="submit" class="btn btn-dark btn-lg" id="addAction">Submit</button>
 		<button class="btn btn-success btn-lg" id="success" style="display: none;">Success!</button>
+	</form>
+	<br>
+	<h2>Validate name</h2>
+	<form class="form-inline" role="form" method="post" action="/check">
+		<div class="form-group">
+			<input class="keyword-input" name="firstName" placeholder="First name">
+			<input class="keyword-input" name="lastName" placeholder="Last name">
+		</div>
+		<button type="submit" class="btn btn-dark btn-lg" id="checkAction">Submit</button>
 	</form>
 	<br>
 	<h2>Lookup</h2>
@@ -49,9 +58,27 @@ $(function() {
 				$('#success').show();
 				setTimeout(function() {
 					$('#success').fadeOut('show');
-				}, 2000);
+				}, 1000);
 				});
 	});
+
+	$('#checkAction').click(function(ev) {
+		ev.preventDefault();
+		var $form = $(this).parent();
+		$.post(
+			"/check",
+			{ 
+				firstName : $form.find('input[name=firstName]').val(), 
+				lastName  : $form.find('input[name=lastName]').val()
+			}
+		).then(function(results) {
+			$("#lookupResults").html('');
+			results.split('\n').forEach(function(message) {
+				$("#lookupResults").append("<li><h2>" + message + "</h2></li>");
+			});
+		});
+	});
+
 
 	$('#lookup').click(function(ev) {
 		ev.preventDefault()

@@ -15,6 +15,9 @@ app.get('/',function(req, res){
 var addHandler = require('./app/action/add');
 app.post('/add', addHandler);
 
+var checkHandler = require('./app/action/check');
+app.post('/check', checkHandler);
+
 var lookupHandler = require('./app/action/lookup');
 app.get('/lookup', lookupHandler);
 
