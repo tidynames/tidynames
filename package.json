@@ -4,9 +4,11 @@
   "description": "Service for name validation",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.12.3",
+    "body-parser": "~1.12.4",
     "clj-fuzzy": "*",
-    "body-parser": "~1.12.4"
+    "express": "^4.12.3",
+    "pg": "^4.3.0",
+    "promise": "^7.0.1"
   },
   "devDependencies": {},
   "scripts": {

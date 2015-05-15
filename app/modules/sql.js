@@ -27,9 +27,6 @@ pg.connect(SQL.conString, function(err, client, done) {
 SQL.query = function(query, params) {
   return new Promise(function (resolve, reject) {
     SQL.client.query(query, params || [], function(err, result) {
-        //call `done()` to release the client back to the pool
-        SQL.done();
-
         if(err) {
           reject(err)
         } else {
