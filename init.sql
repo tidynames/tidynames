@@ -39,8 +39,8 @@ INSERT INTO full_name(person_id, name_id, ordering) VALUES(1, 1, 1);
 INSERT INTO full_name(person_id, name_id, ordering) VALUES(1, 7, 2);
 
 -- Smith John
-INSERT INTO full_name(person_id, name_id, ordering) VALUES(1, 1, 2);
-INSERT INTO full_name(person_id, name_id, ordering) VALUES(1, 7, 1);
+INSERT INTO full_name(person_id, name_id, ordering) VALUES(8, 1, 2);
+INSERT INTO full_name(person_id, name_id, ordering) VALUES(8, 7, 1);
 
 INSERT INTO full_name(person_id, name_id, ordering) VALUES(2, 1, 1);
 INSERT INTO full_name(person_id, name_id, ordering) VALUES(2, 8, 2);
