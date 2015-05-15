@@ -9,10 +9,14 @@ module.exports = function(req, res){
 }
 
 function findBestMatches(name)  {
-    var parts = name.split(' ');
     var promises = [];
-    for (p in parts)  {
-        promises.push(lookupInDb(parts[p].replace(/\s/g, '').toLowerCase()));
+    if (name)  {
+        var parts = name.split(' ');
+		for (p in parts)  {
+            if (parts[p].trim())  {
+		        promises.push(lookupInDb(parts[p].trim().toLowerCase()));
+            }
+		}
     }
     return Promise.all(promises);
 }
@@ -22,10 +26,8 @@ function lookupInDb(name)  {
       var matches = [];
       for (r in result.rows)  {
          var score = matcher.metrics.levenshtein(name, result.rows[r].value);
-         if (score)  {
-             matches.push([result.rows[r].value, score]);
-         } 
-     }
+         matches.push([result.rows[r].value, score]);
+      }
       return matches;
     });
 }
