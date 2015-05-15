@@ -1,3 +1,5 @@
+global.rootPath = __dirname;
+
 var express = require('express');
 var bodyParser = require("body-parser");
 var matcher = require('clj-fuzzy');
