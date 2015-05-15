@@ -21,7 +21,13 @@ module.exports = function(req, res){
 		}
 		return Promise.all(promises);
 	}).then(function(result) {
-		res.send(result);
+		var matches = [];
+		for (x in result)  {
+			if (result[x])  {
+				matches.push(result[x]);
+			}
+		}
+		res.send(matches);
 	});
 };
 
