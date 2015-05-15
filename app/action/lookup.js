@@ -1,27 +1,29 @@
 var SQL = require(global.rootPath + '/app/modules/sql');
+var matcher = require('clj-fuzzy');
+var Promise = require('promise');
 
 module.exports = function(req, res){
-    var bestMatches = [];
-	if (req.query.name)  {
-        bestMatches = lookup(req.query.name);
-    }
+    findBestMatches(req.query.name).then(function(bestMatches)  {
+        res.send(bestMatches);
+    });
+}
 
-	res.send(bestMatches);
+function findBestMatches(name)  {
+    var parts = name.split(' ');
+    var promises = [];
+    for (p in parts)  {
+        promises.push(lookupInDb(parts[p].replace(/\s/g, '').toLowerCase()));
+    }
+    return Promise.all(promises);
 }
 
 function lookupInDb(name)  {
-    // for n in select * from name
-    //   levenshtein(name, n)
-    //   if score < threshold
-    //     append (n, score) to the return list
-}
-
-function lookup(name)  {
-    var matches = [];
-    var parts = name.split(' ');
-    for (p in parts)  {
-        console.log('Looking up', parts[p]);
-        matches.push(lookupInDb(parts[p].replace(/\s/g, '').toLowerCase()));
-    }
-    return matches;  
+    return SQL.query("SELECT value FROM name").then(function(result) {
+      var matches = [];
+      for (r in result.rows)  {
+         var score = matcher.metrics.levenshtein(name, result.rows[r].value);
+         matches.push([result.rows[r].value, score]);
+      }
+      return matches;
+    });
 }
