@@ -96,3 +96,7 @@ input, textarea {
 	text-align: left;
 }
 
+body {
+	color: #333333;
+	font-family: Copperplate, serif;
+}
